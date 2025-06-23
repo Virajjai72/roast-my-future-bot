@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,8 +15,10 @@ interface Question {
   options?: string[];
 }
 
-interface RoastComment {
-  [key: string]: string[];
+interface RoastComments {
+  [key: string]: {
+    [optionKey: string]: string[];
+  };
 }
 
 const Index = () => {
@@ -98,66 +99,321 @@ const Index = () => {
     }
   ];
 
-  const roastComments: RoastComment = {
-    caste: [
-      "General ho? Toh placement bhi general category mein gaya — 'No Entry'.",
-      "OBC ho? Toh reservation bhi kam aaya, bhai tu toh OP hi nikla.",
-      "SC/ST? Placement quota bhi ignore kar gaya tujhe.",
-      "You don't believe in caste? Recruiters don't believe in your resume.",
-      "Caste nahi bataya? HR ne tujhe bhi shortlist nahi kiya."
-    ],
-    college: [
-      "Tier 1? Tu toh coding ka Arijit Singh hoga.",
-      "Tier 3? Placement cell bhi tere se avoid karta hai.",
-      "Diploma? Matlab you're doing engineering's DLC version.",
-      "Private college? Matlab 10L fees, 3.6L job, aur 0 self-respect.",
-      "IIT? Gharwale abhi bhi shaadi fix kar rahe honge, job ki guarantee samajh ke."
-    ],
-    branch: [
-      "Mech ho? Matlab placement mein lubrication aur jugaad.",
-      "CSE? Tera laptop hi tera therapist hai.",
-      "Civil? Banega toh bridge, but job nahi milega.",
-      "Biotech? Matlab tu NEET bhi nahi nikal paya.",
-      "Other? Matlab placement ke naam pe momos bechne ka plan hai?"
-    ],
-    cgpa: [
-      "9+ CGPA? Gharwale proud hai, HR confused hai.",
-      "8–9? Balance between Netflix & No Placement.",
-      "<7? Resume mein emoji daalna start kar de.",
-      "Don't ask? Matlab degree mein watermark bhi nahi dikhta.",
-      "7-8? Matlab tu average hai, placement bhi average milegi."
-    ],
-    gender: [
-      "Male? Matlab coding + crying = career.",
-      "Female? Tera LinkedIn already viral hoga #WomenInTech",
-      "Other? Recruiter bhi confused, but diversity mil gayi."
-    ],
-    coding: [
-      "Yes? Toh tu placement nahi, hackathon jeetega.",
-      "No? Matlab tu placement mein PPT banayega.",
-      "GitHub se copy? Full-stack copy-paste engineer."
-    ],
-    drink: [
-      "Weekend pe peeta hai? Matlab deadlines Sunday ko yaad aate hai.",
-      "Sanskari? Matlab HR bhi bore ho gayi.",
-      "Bottle mein rehta hai? Tu toh Spirit-level engineer hai."
-    ],
-    masturbate: [
-      "Daily? Toh job ke liye haath bhi chal raha, CV bhi.",
-      "Sometimes? Matlab tu intern se zyada internship mein interested hai.",
-      "Never? Is lie se itna tension mein lagta hai."
-    ],
-    virgin: [
-      "Virgin? Toh placement bhi tera pehla hoga.",
-      "No? Toh CV mein likh 'Soft skills: seduction'.",
-      "Emotionally? Matlab HR round mein rona sure hai."
-    ],
-    relationship: [
-      "Yes? Matlab coding kam, cuddling zyada.",
-      "No? HR bhi tera profile ignore karta hai.",
-      "Situationship? Matlab tu placement mein bhi stuck hai.",
-      "Anime dekhte ho? Toh tu emotionally Japanese ho chuka hai."
-    ]
+  const roastComments: RoastComments = {
+    caste: {
+      'General': [
+        "General ho? Toh placement bhi general category mein gaya — 'No Entry'.",
+        "General quota mein sab common milta hai — pain, trauma, and TCS offer.",
+        "General? Matlab 8 CGPA = reject, 9 CGPA = overqualified.",
+        "Tera naam dekh ke HR ne bola: 'Yeh bhi general hi hoga.'",
+        "Reservation nahi mila, placement bhi nahi mil raha. Consistency!"
+      ],
+      'OBC': [
+        "OBC? Toh tu Other Bakchodi Category mein hi jaata hai.",
+        "Tera placement OBC mein bhi backlog mein chala gaya hai.",
+        "OBC ho? Phir bhi quota wasted. Kya kar raha tha 4 saal?",
+        "Tujhe sirf PAN card mila, placement card nahi.",
+        "OBC + Tier 3 = No BC, only OC (Over Crying)."
+      ],
+      'SC/ST': [
+        "SC/ST ho? Par placement toh sabka SC hai ab.",
+        "SC/ST quota bhi tujhe skip kar gaya bhai.",
+        "HR ne SC/ST dekh ke bola: 'Isko shortlist karne se meri bhi SC lagegi.'",
+        "Tu placement mein last round tak gaya — aur waha bhi category dekh ke reject.",
+        "SC/ST ho? Par tu toh category se zyada confusion mein nikla."
+      ],
+      "I don't believe in caste": [
+        "Caste ignore karta hai? Resume bhi tujhe ignore karta hai.",
+        "Na tu General, na Reserved — tu toh straight Unemployed hai.",
+        "Caste nahi maanta? HR bhi tera existence nahi maanta.",
+        "Modern thinking hai, par placement ancient age mein stuck hai.",
+        "You don't believe in caste? Recruiters don't believe in your resume."
+      ],
+      "What's caste?": [
+        "Caste kya hai? Beta, HR ne tera profile bhi 'Unknown' daala.",
+        "Tu caste se free, placement se bhi!",
+        "HR bhi tera caste dekh ke confusion mein pad gaya.",
+        "Caste nahi pata? Matlab tu category mein bhi aur placement mein bhi lost hai.",
+        "Innocence level: Caste nahi pata. Job level: Bhi nahi pata."
+      ]
+    },
+    college: {
+      'Tier 1 (IIT/NIT/BITS)': [
+        "Tier 1? Pehle placement, fir depression guaranteed.",
+        "IIT? Gharwale abhi bhi shaadi fix kar rahe honge, job ki guarantee samajh ke.",
+        "Tier 1 se ho? Toh coding ka Arijit Singh hoga.",
+        "NIT/BITS? Matlab tu brand value pe survive kar raha hai.",
+        "Tier 1 college, Tier 3 personality."
+      ],
+      'Tier 2 (State Govt)': [
+        "Tier 2? Naukri.com hi tera Harvard hai.",
+        "State college? Matlab tu govt job ka sapna dekh raha tha.",
+        "Tier 2 se nikla? Toh placement bhi 2nd class milegi.",
+        "Government college? Free mein padhke bhi free mein reject ho gaya.",
+        "State quota se admission, placement mein state bhi nahi pucha."
+      ],
+      'Tier 3 (Private)': [
+        "Tier 3? Placement cell bhi tere se avoid karta hai.",
+        "Private college? Matlab 10L fees, 3.6L job, aur 0 self-respect.",
+        "Tier 3? Toh CV ka format bhi copied hai.",
+        "Private university? Tu MBA karne wala hai next year.",
+        "Tier 3 college = Placement guarantee void."
+      ],
+      'Diploma/Polytechnic': [
+        "Diploma? Matlab you're doing engineering's DLC version.",
+        "Polytechnic? Tu toh practical se theoretical tak haar gaya.",
+        "Diploma wala? Toh degree bhi half, placement bhi half.",
+        "3 saal mein kya seekha? 4 saal wale bhi unemployed hain.",
+        "Diploma hai? Matlab shortcut leke bhi destination nahi mila."
+      ],
+      'Chhapri University': [
+        "Chhapri University? Bhai honest ho gaya finally.",
+        "University ka naam sunte hi HR phone disconnect kar deta hai.",
+        "Chhapri se degree? Matlab chhapri hi rahega career bhi.",
+        "College name mein hi placement prospects clear hain.",
+        "Tu toh university ki website pe bhi placement statistics hide karta hai."
+      ]
+    },
+    branch: {
+      'CSE': [
+        "CSE? Tera laptop hi tera therapist hai.",
+        "CSE wala? Toh tu code bhi likhta hai aur ro bhi leta hai.",
+        "Computer Science? Par tera future science fiction lagta hai.",
+        "CSE branch, but social skills delete kar diya.",
+        "Tu coding aur crying mein balance maintain kar raha hai."
+      ],
+      'ECE': [
+        "ECE? Matlab tu hardware aur HR dono ko confuse karta hai.",
+        "Electronics se ho? Par tera circuit placement mein short ho gaya.",
+        "ECE branch? Toh tu analog problems ke saath digital solutions dhund raha hai.",
+        "Electronics aata hai? Par communication skills mein current nahi aa raha.",
+        "ECE ka matlab: Either Coding or Engineering — dono mein fail."
+      ],
+      'Mech': [
+        "Mech ho? Matlab placement mein lubrication aur jugaad.",
+        "Mechanical? Toh tera career bhi manually operated hai.",
+        "Mech wale? Job nahi, gearbox samajh aata hai.",
+        "Mechanical engineering? Par tera placement mechanism fail ho gaya.",
+        "Mech branch se ho? Toh internship bhi oiling ka milega."
+      ],
+      'Civil': [
+        "Civil? Banega toh bridge, but job nahi milega.",
+        "Civil ho? Toh tera career bhi under construction hai.",
+        "Civil engineer? Matlab tu roads banayega, par apna rasta nahi mil raha.",
+        "Civil branch? Government job ke alawa koi option nahi.",
+        "Civil se ho? Toh tera placement bhi infrastructure problem hai."
+      ],
+      'Biotech': [
+        "Biotech? Matlab tu NEET bhi nahi nikal paya.",
+        "Biotechnology? Par tera career extinct ho raha hai.",
+        "Biotech branch? Matlab tu biology aur technology dono mein average hai.",
+        "Biotech wala? Research karne ke alawa koi job nahi milta.",
+        "Biology + Technology = Jobless with scientific explanation."
+      ],
+      'Other (means jobless)': [
+        "Other? Matlab placement ke naam pe momos bechne ka plan hai?",
+        "Other branch? Matlab tu syllabus mein bhi aur placement mein bhi '404 Not Found'.",
+        "Other means tu category mein bhi confusion mein hai.",
+        "Branch 'Other'? HR ne tujhe bhi 'Other' category mein daal diya.",
+        "Other branch = Other plans (non-engineering) confirmed."
+      ]
+    },
+    cgpa: {
+      '9+': [
+        "9+ CGPA? Gharwale proud hai, HR confused hai.",
+        "9+ hai? Toh tu beta, resume ke saath ego bhi submit karta hai.",
+        "High CGPA? Matlab overqualified for rejection.",
+        "9+ CGPA with 0 soft skills = Premium rejection.",
+        "CGPA toh top hai, par placement bottom mein."
+      ],
+      '8-9': [
+        "8–9? Balance between Netflix & No Placement.",
+        "8-9 CGPA? Matlab smart, but still rejected — life is fair.",
+        "Good CGPA, bad luck in placement. Story of every engineer.",
+        "8+ CGPA? Matlab padhaai ki, par skills nahi seekhi.",
+        "Academic topper, placement flopper."
+      ],
+      '7-8': [
+        "7-8? Matlab tu average hai, placement bhi average milegi.",
+        "Decent CGPA, indecent placement prospects.",
+        "7+ CGPA? Matlab mediocre performance, mediocre job guaranteed.",
+        "Tu average student hai, average salary bhi accept kar le.",
+        "7-8 CGPA = Perfectly balanced rejection rate."
+      ],
+      '<7': [
+        "<7? Resume mein emoji daalna start kar de.",
+        "7 ke neeche? Degree ke saath sympathy bhi print ho rahi hai.",
+        "Low CGPA? Matlab tu final year mein realise hua placement bhi chahiye.",
+        "CGPA low hai? Toh expectation bhi low rakh.",
+        "Sub-7 CGPA = Sub-standard placement confirmed."
+      ],
+      "Don't ask pls": [
+        "Don't ask? Matlab degree mein watermark bhi nahi dikhta.",
+        "CGPA chhupata hai? HR ne tujhe bhi hide kar diya shortlist se.",
+        "Don't ask pls? Matlab tera academic record bhi embarrassing hai.",
+        "CGPA confidential? Matlab placement bhi confidential rahegi.",
+        "Tu CGPA se darr raha hai, placement se toh ro padega."
+      ]
+    },
+    gender: {
+      'Male': [
+        "Male? Matlab coding + crying = career.",
+        "Male engineer = less salary + more memes.",
+        "Tu male hai? Toh competition bhi zyada, sympathy bhi kam.",
+        "Male candidate? HR ne gender dekh ke sigh kar diya.",
+        "Ladka hai? Matlab struggle real, placement surreal."
+      ],
+      'Female': [
+        "Female? Tera LinkedIn already viral hoga #WomenInTech",
+        "Female engineer? Matlab diversity quota mein advantage.",
+        "Ladki ho? Toh placement mein thoda easy mode mil jaayega.",
+        "Female candidate? Companies lined up hongi, interviews ke liye.",
+        "She codes? Companies immediately interested."
+      ],
+      'Other': [
+        "Other? Recruiter bhi confused, but diversity mil gayi.",
+        "Other gender? HR ne Google search kiya diversity policy ke liye.",
+        "Gender 'Other'? Matlab tu categories mein bhi unique hai.",
+        "Other? Placement mein bhi tu different treatment expect kar.",
+        "Progressive gender choice, regressive placement chances."
+      ]
+    },
+    coding: {
+      'Yes': [
+        "Yes? Toh tu placement nahi, hackathon jeetega.",
+        "Coding aati hai? Toh leetcode pe shaadi karle.",
+        "Haan coding aata hai, par logic se zyada logon ko ignore karta hai.",
+        "Coder hai? Toh salary expectation bhi decode kar le.",
+        "Coding skills: Present. Social skills: undefined."
+      ],
+      'No': [
+        "No? Matlab tu placement mein PPT banayega.",
+        "No coding? Toh tu PPT banane ke liye engineer bana kya?",
+        "Coding nahi aata? Excel expert ban ja, safer hai.",
+        "Non-coder engineer? Matlab tu management trainee material hai.",
+        "No coding = No high-paying job. Simple math."
+      ],
+      'Copy from GitHub': [
+        "GitHub se copy? Full-stack copy-paste engineer.",
+        "GitHub se copy? Tu toh Ctrl+C ka HR version hai.",
+        "Copy-paste expert? Interview mein original code maangenge.",
+        "GitHub dependency? Matlab tu open-source unemployed hai.",
+        "Copy from GitHub = Copy someone else's job prospects too."
+      ]
+    },
+    drink: {
+      'Yes, weekend only': [
+        "Weekend pe peeta hai? Matlab deadlines Sunday ko yaad aate hai.",
+        "Weekend drinking? Toh tera startup ka naam hoga 'Hangover Pvt Ltd'.",
+        "Weekend drinker? Monday blues permanent hain tere liye.",
+        "Sirf weekend? Placement ke baad daily ho jaayega.",
+        "Weekend pe peeta hai? Interview mein bhi weekend mood rahega."
+      ],
+      "No, I'm sanskari": [
+        "Sanskari? Matlab HR bhi bore ho gayi.",
+        "Non-drinker? Toh tujhe placement ke liye sacrifice banana padega.",
+        "Sanskari ho? Par placement asanskari hai tera saath.",
+        "No drinking? Toh friends circle mein tu always driver hoga.",
+        "Sanskari candidate? Companies ko lagta hai tu flexible nahi hai."
+      ],
+      'I live in a bottle': [
+        "Bottle mein rehta hai? Tu toh Spirit-level engineer hai.",
+        "Bottle mein rehta hai? Toh tere SOP mein bhi Old Monk hoga.",
+        "Heavy drinker? Placement chances bhi heavy drunk hain.",
+        "Bottle lover? Interview mein bhi drunk and disorderly rahega.",
+        "Alcoholic engineer? Matlab debugging skills alcohol mein doob gaye."
+      ]
+    },
+    masturbate: {
+      'Daily': [
+        "Daily? Toh job ke liye haath bhi chal raha, CV bhi.",
+        "Roz ke routine mein tu sirf self-employment kar raha hai.",
+        "Daily practice? Interview mein bhi nervous ho jaayega.",
+        "Jitna tu apne haath chalaata hai, utna toh placement drive bhi nahi chalte.",
+        "Daily routine hai? Toh self-motivation toh perfect hoga."
+      ],
+      'Sometimes': [
+        "Sometimes? Matlab tu intern se zyada internship mein interested hai.",
+        "Kabhi kabhi? Toh tu placement ke liye bhi 'sometimes interested' hai.",
+        "Part-time activity? Full-time job ke liye commitment nahi hai.",
+        "Sometimes means tu consistent bhi nahi hai isme.",
+        "Irregular practice? Placement results bhi irregular honge."
+      ],
+      'Never': [
+        "Never? Is lie se itna tension mein lagta hai.",
+        "Never? Bro tu toh HR ke samne bhi nervous breakdown ho jaayega.",
+        "Kabhi nahi? Matlab tu stress release bhi nahi kar sakta.",
+        "Never masturbate? Toh tu interviews mein kaise cope karega?",
+        "Never means tu self-care mein bhi failure hai."
+      ],
+      'Prefer not to say': [
+        "Prefer not to say? Interview mein bhi private rahega?",
+        "Batana nahi chahta? HR round mein bhi secretive rahega.",
+        "Confidential hai? Salary bhi confidential rahegi.",
+        "Not to say? Matlab tu personal questions se uncomfortable hai.",
+        "Privacy lover? Corporate world mein privacy nahi milti."
+      ]
+    },
+    virgin: {
+      'Yes (sadly)': [
+        "Virgin? Toh placement bhi tera pehla hoga.",
+        "Virgin ho? Matlab abhi tak kisi company ne touch bhi nahi kiya.",
+        "Sadly virgin? Placement mein bhi sadly rejected rahega.",
+        "First time experience ke liye ready? Rejection bhi first time hoga.",
+        "Virgin candidate? Companies ko innocence pasand nahi."
+      ],
+      'No': [
+        "No? Toh CV mein likh 'Soft skills: seduction'.",
+        "Non-virgin? HR ne tujhe 'experienced candidate' maan liya.",
+        "Experience hai? Toh tu placement se zyada HR se mil chuka hai.",
+        "Not virgin? Matlab confidence level high hoga interviews mein.",
+        "Experienced in life? Experienced in rejection bhi ho jaayega."
+      ],
+      'Emotionally only': [
+        "Emotionally? Matlab HR round mein rona sure hai.",
+        "Emotionally only? Matlab tu LinkedIn pe bhi crying emoji daal raha hai.",
+        "Emotional virgin? Placement rejection emotional damage karega.",
+        "Physically experienced, emotionally naive? Weird combination.",
+        "Emotionally virgin means workplace politics mein survive nahi karega."
+      ],
+      "Who's asking?": [
+        "Who's asking? HR bhi yahi question karega background check mein.",
+        "Privacy chahiye? Interview mein bhi defensive rahega.",
+        "Who's asking? Matlab tu uncomfortable questions se darr raha hai.",
+        "Defensive attitude? Workplace mein team player nahi ban paayega.",
+        "Question counter-question? Problem-solving skills questionable."
+      ]
+    },
+    relationship: {
+      'Yes': [
+        "Yes? Matlab coding kam, cuddling zyada.",
+        "Yes? Tera motivation partner hai, placement nahi.",
+        "Relationship hai? Toh attention divided, focus bhi divided.",
+        "GF/BF hai? Distraction level maximum.",
+        "In relationship? Matlab tu emotionally unavailable for career growth."
+      ],
+      'No': [
+        "No? HR bhi tera profile ignore karta hai.",
+        "No? Toh tu apne CV ko hi swipe kar raha hai daily.",
+        "Single ho? Matlab desperate for any kind of acceptance.",
+        "No relationship? Social skills mein improvement needed.",
+        "Forever alone? Career mein bhi alone hi rahega."
+      ],
+      'Situationship': [
+        "Situationship? Matlab tu placement mein bhi stuck hai.",
+        "Situationship? Tera career bhi 'it's complicated' mein hai.",
+        "Confused relationship status? Job status bhi confused rahegi.",
+        "Situationship means commitment issues. Employers hate that.",
+        "Undefined relationship? Career path bhi undefined."
+      ],
+      'I watch anime': [
+        "Anime dekhte ho? Toh tu emotionally Japanese ho chuka hai.",
+        "Anime watcher? Real world mein adjustment problems honge.",
+        "Waifu > real life? Salary bhi virtual milegi.",
+        "Anime addict? Social interaction skills compromised.",
+        "2D love? 3D career prospects bhi flat."
+      ]
+    }
   };
 
   const finalRoasts = [
@@ -172,6 +428,22 @@ const Index = () => {
     "Congrats! You're qualified to be a coding bootcamp victim.",
     "Result: Teaching kids coding while crying about your own career."
   ];
+
+  const getRandomFromArray = (array: string[]) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+
+  const getRoastForAnswer = (questionId: string, answer: string) => {
+    const questionComments = roastComments[questionId];
+    if (!questionComments) return "Interesting choice... anyway moving on.";
+    
+    const optionComments = questionComments[answer];
+    if (!optionComments || optionComments.length === 0) {
+      return "Interesting choice... anyway moving on.";
+    }
+    
+    return getRandomFromArray(optionComments);
+  };
 
   const typeWriter = (text: string, callback?: () => void) => {
     setIsTyping(true);
@@ -192,14 +464,13 @@ const Index = () => {
     const questionId = questions[currentQuestion].id;
     setAnswers(prev => ({ ...prev, [questionId]: value }));
     
-    // Generate roast for current answer
-    const roasts = roastComments[questionId] || ["Interesting choice... anyway moving on."];
-    const randomRoast = roasts[Math.floor(Math.random() * roasts.length)];
+    // Generate roast for current answer using proper mapping
+    let personalizedRoast = '';
     
-    // If it's name question, personalize it
-    let personalizedRoast = randomRoast;
     if (questionId === 'name' && value.trim()) {
       personalizedRoast = `${value}? Yeh naam toh rejection list mein 3rd baar aaya tha.`;
+    } else {
+      personalizedRoast = getRoastForAnswer(questionId, value);
     }
     
     setCurrentRoast(personalizedRoast);
@@ -213,7 +484,7 @@ const Index = () => {
           setIsAnalyzing(true);
           setTimeout(() => {
             setIsAnalyzing(false);
-            const finalRoast = finalRoasts[Math.floor(Math.random() * finalRoasts.length)];
+            const finalRoast = getRandomFromArray(finalRoasts);
             typeWriter(finalRoast, () => {
               setShowResult(true);
             });
