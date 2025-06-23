@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { Share2, RotateCcw, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import Background3D from '@/components/Background3D';
+import MemeDisplay from '@/components/MemeDisplay';
 
 interface Question {
   id: string;
@@ -29,6 +31,7 @@ const Index = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [currentRoast, setCurrentRoast] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [showMeme, setShowMeme] = useState(false);
   const { toast } = useToast();
 
   const questions: Question[] = [
@@ -474,8 +477,11 @@ const Index = () => {
     }
     
     setCurrentRoast(personalizedRoast);
+    setShowMeme(true);
+    
     typeWriter(personalizedRoast, () => {
       setTimeout(() => {
+        setShowMeme(false);
         if (currentQuestion < questions.length - 1) {
           setCurrentQuestion(prev => prev + 1);
           setCurrentRoast('');
@@ -487,10 +493,11 @@ const Index = () => {
             const finalRoast = getRandomFromArray(finalRoasts);
             typeWriter(finalRoast, () => {
               setShowResult(true);
+              setShowMeme(true);
             });
           }, 3000);
         }
-      }, 2000);
+      }, 3000);
     });
   };
 
@@ -501,13 +508,14 @@ const Index = () => {
     setTypingText('');
     setCurrentRoast('');
     setIsAnalyzing(false);
+    setShowMeme(false);
   };
 
   const shareResult = () => {
-    const shareText = `Just got roasted by an AI about my placement chances 😭 Check out this brutal ML predictor!`;
+    const shareText = `Just got roasted by Placemint.AI about my placement chances 😭 Check out this brutal ML predictor!`;
     if (navigator.share) {
       navigator.share({
-        title: 'ML Placement Predictor Roast',
+        title: 'Placemint.AI Roast Results',
         text: shareText,
         url: window.location.href
       });
@@ -524,72 +532,80 @@ const Index = () => {
 
   if (isAnalyzing) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl bg-slate-800/50 border-purple-500/20 backdrop-blur">
-          <CardContent className="p-8 text-center">
-            <div className="animate-spin text-6xl mb-6">🤖</div>
-            <h2 className="text-2xl font-bold text-white mb-4">Analyzing with Advanced ML Algorithm...</h2>
-            <div className="space-y-3 text-purple-300">
-              <p className="animate-pulse">Training neural networks on your data...</p>
-              <p className="animate-pulse">Cross-referencing with placement statistics...</p>
-              <p className="animate-pulse">Calculating roast intensity...</p>
-              <p className="animate-pulse">Loading brutal comments database...</p>
-            </div>
-            <div className="mt-6">
-              <div className="w-full bg-slate-700 rounded-full h-2">
-                <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full animate-pulse w-3/4"></div>
+      <div className="min-h-screen relative">
+        <Background3D />
+        <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+          <Card className="w-full max-w-2xl bg-slate-800/50 border-purple-500/20 backdrop-blur">
+            <CardContent className="p-8 text-center">
+              <div className="animate-spin text-6xl mb-6">🤖</div>
+              <h2 className="text-2xl font-bold text-white mb-4">Placemint.AI Analyzing...</h2>
+              <div className="space-y-3 text-purple-300">
+                <p className="animate-pulse">Training neural networks on your data...</p>
+                <p className="animate-pulse">Cross-referencing with placement statistics...</p>
+                <p className="animate-pulse">Calculating roast intensity...</p>
+                <p className="animate-pulse">Loading brutal comments database...</p>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-6">
+                <div className="w-full bg-slate-700 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full animate-pulse w-3/4"></div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
 
   if (showResult) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl bg-slate-800/50 border-red-500/20 backdrop-blur">
-          <CardHeader className="text-center">
-            <div className="text-6xl mb-4">💀</div>
-            <CardTitle className="text-3xl font-bold text-white">
-              ML Placement Prediction Complete!
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-8 text-center space-y-6">
-            <div className="bg-red-900/30 p-6 rounded-lg border border-red-500/30">
-              <h3 className="text-xl font-bold text-red-300 mb-3">Final Verdict:</h3>
-              <p className="text-lg text-white">{typingText}</p>
-            </div>
-            
-            <div className="text-center space-y-4">
-              <p className="text-purple-300">
-                Hey {answers.name || 'Anonymous'}, our AI has spoken! 🤖
-              </p>
-              <p className="text-sm text-slate-400">
-                (This is all satirical fun, keep grinding! 💪)
-              </p>
-            </div>
+      <div className="min-h-screen relative">
+        <Background3D />
+        <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+          <Card className="w-full max-w-2xl bg-slate-800/50 border-red-500/20 backdrop-blur">
+            <CardHeader className="text-center">
+              <div className="text-6xl mb-4">💀</div>
+              <CardTitle className="text-3xl font-bold text-white">
+                Placemint.AI Prediction Complete!
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-8 text-center space-y-6">
+              <div className="bg-red-900/30 p-6 rounded-lg border border-red-500/30">
+                <h3 className="text-xl font-bold text-red-300 mb-3">Final Verdict:</h3>
+                <p className="text-lg text-white">{typingText}</p>
+              </div>
+              
+              <MemeDisplay isVisible={showMeme} />
+              
+              <div className="text-center space-y-4">
+                <p className="text-purple-300">
+                  Hey {answers.name || 'Anonymous'}, our AI has spoken! 🤖
+                </p>
+                <p className="text-sm text-slate-400">
+                  (This is all satirical fun, keep grinding! 💪)
+                </p>
+              </div>
 
-            <div className="flex gap-4 justify-center">
-              <Button 
-                onClick={shareResult}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              >
-                <Share2 className="mr-2 h-4 w-4" />
-                Share My Roast
-              </Button>
-              <Button 
-                onClick={resetQuiz}
-                variant="outline"
-                className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
-              >
-                <RotateCcw className="mr-2 h-4 w-4" />
-                Get Roasted Again
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="flex gap-4 justify-center">
+                <Button 
+                  onClick={shareResult}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                >
+                  <Share2 className="mr-2 h-4 w-4" />
+                  Share My Roast
+                </Button>
+                <Button 
+                  onClick={resetQuiz}
+                  variant="outline"
+                  className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
+                >
+                  <RotateCcw className="mr-2 h-4 w-4" />
+                  Get Roasted Again
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -597,107 +613,114 @@ const Index = () => {
   const currentQ = questions[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 pt-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-            🤖 ML Placement Predictor
-          </h1>
-          <p className="text-lg text-purple-300">
-            Satirical roasting machine for engineering students
-          </p>
-          <p className="text-sm text-slate-400 mt-2">
-            Prepare to get brutally roasted in Hin-glish! 😈
-          </p>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="flex justify-between text-sm text-purple-300 mb-2">
-            <span>Question {currentQuestion + 1} of {questions.length}</span>
-            <span>{Math.round(progressPercentage)}%</span>
+    <div className="min-h-screen relative">
+      <Background3D />
+      <div className="relative z-10 min-h-screen p-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-8 pt-8">
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+              🤖 Placemint.AI
+            </h1>
+            <p className="text-xl text-purple-300 mb-2">
+              Satirical roasting machine for engineering students
+            </p>
+            <p className="text-sm text-slate-400 mt-2">
+              Prepare to get brutally roasted in Hin-glish! 😈
+            </p>
           </div>
-          <Progress value={progressPercentage} className="h-2" />
-        </div>
 
-        {/* Question Card */}
-        <Card className="bg-slate-800/50 border-purple-500/20 backdrop-blur mb-6">
-          <CardHeader>
-            <CardTitle className="text-xl text-white">
-              {currentQ.question}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {currentQ.type === 'radio' ? (
-              <RadioGroup 
-                onValueChange={handleAnswer}
-                className="space-y-3"
-              >
-                {currentQ.options?.map((option, index) => (
-                  <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-slate-700/30 transition-colors">
-                    <RadioGroupItem 
-                      value={option} 
-                      id={option}
-                      className="border-purple-500 text-purple-500"
-                    />
-                    <Label 
-                      htmlFor={option} 
-                      className="text-white cursor-pointer flex-1"
-                    >
-                      {option}
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
-            ) : (
-              <div className="space-y-4">
-                <Input
-                  placeholder="Type kar de bhai..."
-                  className="bg-slate-700/50 border-purple-500/30 text-white placeholder:text-slate-400"
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      const value = (e.target as HTMLInputElement).value;
-                      if (value.trim()) {
-                        handleAnswer(value);
+          {/* Progress Bar */}
+          <div className="mb-8">
+            <div className="flex justify-between text-sm text-purple-300 mb-2">
+              <span>Question {currentQuestion + 1} of {questions.length}</span>
+              <span>{Math.round(progressPercentage)}%</span>
+            </div>
+            <Progress value={progressPercentage} className="h-2" />
+          </div>
+
+          {/* Question Card */}
+          <Card className="bg-slate-800/60 border-purple-500/20 backdrop-blur mb-6">
+            <CardHeader>
+              <CardTitle className="text-xl text-white">
+                {currentQ.question}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {currentQ.type === 'radio' ? (
+                <RadioGroup 
+                  onValueChange={handleAnswer}
+                  className="space-y-3"
+                >
+                  {currentQ.options?.map((option, index) => (
+                    <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-slate-700/30 transition-colors">
+                      <RadioGroupItem 
+                        value={option} 
+                        id={option}
+                        className="border-purple-500 text-purple-500"
+                      />
+                      <Label 
+                        htmlFor={option} 
+                        className="text-white cursor-pointer flex-1"
+                      >
+                        {option}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              ) : (
+                <div className="space-y-4">
+                  <Input
+                    placeholder="Type kar de bhai..."
+                    className="bg-slate-700/50 border-purple-500/30 text-white placeholder:text-slate-400"
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        const value = (e.target as HTMLInputElement).value;
+                        if (value.trim()) {
+                          handleAnswer(value);
+                        }
                       }
-                    }
-                  }}
-                />
-                <p className="text-sm text-slate-400">Press Enter to continue</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Roast Display */}
-        {currentRoast && (
-          <Card className="bg-red-900/20 border-red-500/30 backdrop-blur">
-            <CardContent className="p-6">
-              <div className="flex items-start space-x-3">
-                <div className="text-2xl">🔥</div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold text-red-300 mb-2">AI Roast:</h3>
-                  <p className="text-white">
-                    {isTyping ? (
-                      <>
-                        {typingText}
-                        <span className="animate-pulse">|</span>
-                      </>
-                    ) : (
-                      typingText
-                    )}
-                  </p>
+                    }}
+                  />
+                  <p className="text-sm text-slate-400">Press Enter to continue</p>
                 </div>
-              </div>
+              )}
             </CardContent>
           </Card>
-        )}
 
-        {/* Footer */}
-        <div className="text-center mt-8 text-slate-400 text-sm">
-          <p>⚠️ This is pure satire and entertainment. Don't take it seriously!</p>
-          <p className="mt-2">Made with 💀 for engineering students who can take a joke</p>
+          {/* Roast Display */}
+          {currentRoast && (
+            <Card className="bg-red-900/20 border-red-500/30 backdrop-blur mb-6">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-3">
+                  <div className="text-2xl">🔥</div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-red-300 mb-2">Placemint.AI Roast:</h3>
+                    <p className="text-white">
+                      {isTyping ? (
+                        <>
+                          {typingText}
+                          <span className="animate-pulse">|</span>
+                        </>
+                      ) : (
+                        typingText
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Meme Display */}
+          <MemeDisplay isVisible={showMeme && currentRoast && !isTyping} />
+
+          {/* Footer */}
+          <div className="text-center mt-8 text-slate-400 text-sm">
+            <p>⚠️ This is pure satire and entertainment. Don't take it seriously!</p>
+            <p className="mt-2">Made with 💀 for engineering students who can take a joke</p>
+            <p className="mt-1 text-purple-400">Powered by Placemint.AI</p>
+          </div>
         </div>
       </div>
     </div>
