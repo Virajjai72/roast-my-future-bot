@@ -9,6 +9,7 @@ import { Share2, RotateCcw, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Background3D from '@/components/Background3D';
 import MemeDisplay from '@/components/MemeDisplay';
+import EmailResponse from '@/components/EmailResponse';
 
 interface Question {
   id: string;
@@ -420,16 +421,21 @@ const Index = () => {
   };
 
   const finalRoasts = [
-    "Congratulations! You'll be placed as unpaid intern in your cousin's startup.",
-    "Our AI predicts: MBA after rejection from 12 companies.",
-    "Breaking News: You are selected for… absolutely nothing. 🎉",
-    "Placement result: Swiggy delivery boy with engineering degree.",
-    "AI says: Start preparing for govt exam, private sector gave up on you.",
-    "Prediction: You'll become a YouTuber teaching 'How NOT to get placed'.",
-    "Final result: Family business mein 'Software Developer' ka designation milega.",
-    "Our ML model crashed trying to find your placement probability.",
-    "Congrats! You're qualified to be a coding bootcamp victim.",
-    "Result: Teaching kids coding while crying about your own career."
+    "🎉 Congratulations! You'll be placed as Chief Meme Officer in your uncle's WhatsApp group business.",
+    "🤖 Our quantum AI predicts: MBA after getting rejected by 47 companies (including your local grocery store).",
+    "💀 Breaking News: You are selected for the most prestigious position... absolutely nothing! Your parents are so proud.",
+    "🏆 Placement result: Swiggy delivery executive with a software engineering degree (at least you'll know algorithms for shortest path).",
+    "🎓 AI says: Start preparing for govt exam, private sector filed a restraining order against you.",
+    "📹 Prediction: You'll become a YouTuber teaching 'How NOT to get placed' - finally, a career that matches your expertise!",
+    "👔 Final result: Family business mein 'Chief Technology Officer' ka designation milega (technology = Excel + WhatsApp).",
+    "💻 Our ML model crashed trying to calculate your placement probability. Error: Division by zero.",
+    "🎪 Congrats! You're overqualified to be a coding bootcamp victim and underqualified for everything else.",
+    "📚 Result: Teaching kids 'Scratch programming' while internally scratching your head about your own future.",
+    "🤡 Plot twist: You'll end up in HR, rejecting students just like yourself. The circle of corporate life!",
+    "🚀 Startup prediction: You'll launch 'PlaceMint 2.0' - a therapy app for unemployed engineers.",
+    "💰 Salary expectation vs Reality: You asked for 6 LPA, you'll get 6 months free internship + travel allowance (bus pass).",
+    "🎯 Achievement unlocked: Professional interview attendee. 200+ interviews, 0 offers, but hey, free samosas!",
+    "🏠 Final destination: Ghar pe baith ke freelancing (aka watching Netflix while parents think you're working)."
   ];
 
   const getRandomFromArray = (array: string[]) => {
@@ -537,17 +543,18 @@ const Index = () => {
         <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
           <Card className="w-full max-w-2xl bg-slate-800/50 border-purple-500/20 backdrop-blur">
             <CardContent className="p-8 text-center">
-              <div className="animate-spin text-6xl mb-6">🤖</div>
-              <h2 className="text-2xl font-bold text-white mb-4">Placemint.AI Analyzing...</h2>
+              <div className="animate-spin text-6xl mb-6">🛸</div>
+              <h2 className="text-2xl font-bold text-white mb-4">Placemint.AI Quantum Analysis...</h2>
               <div className="space-y-3 text-purple-300">
-                <p className="animate-pulse">Training neural networks on your data...</p>
-                <p className="animate-pulse">Cross-referencing with placement statistics...</p>
-                <p className="animate-pulse">Calculating roast intensity...</p>
-                <p className="animate-pulse">Loading brutal comments database...</p>
+                <p className="animate-pulse">🌌 Consulting galactic placement database...</p>
+                <p className="animate-pulse">🤖 Training neural networks on cosmic rejection patterns...</p>
+                <p className="animate-pulse">🔥 Calculating maximum roast intensity without causing existential crisis...</p>
+                <p className="animate-pulse">💀 Loading brutal comments from parallel universe...</p>
+                <p className="animate-pulse">🎯 Cross-referencing with unemployment statistics across galaxies...</p>
               </div>
               <div className="mt-6">
                 <div className="w-full bg-slate-700 rounded-full h-2">
-                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full animate-pulse w-3/4"></div>
+                  <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 h-2 rounded-full animate-pulse w-3/4"></div>
                 </div>
               </div>
             </CardContent>
@@ -562,49 +569,61 @@ const Index = () => {
       <div className="min-h-screen relative">
         <Background3D />
         <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-          <Card className="w-full max-w-2xl bg-slate-800/50 border-red-500/20 backdrop-blur">
-            <CardHeader className="text-center">
-              <div className="text-6xl mb-4">💀</div>
-              <CardTitle className="text-3xl font-bold text-white">
-                Placemint.AI Prediction Complete!
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-8 text-center space-y-6">
-              <div className="bg-red-900/30 p-6 rounded-lg border border-red-500/30">
-                <h3 className="text-xl font-bold text-red-300 mb-3">Final Verdict:</h3>
-                <p className="text-lg text-white">{typingText}</p>
-              </div>
-              
-              <MemeDisplay isVisible={showMeme} />
-              
-              <div className="text-center space-y-4">
-                <p className="text-purple-300">
-                  Hey {answers.name || 'Anonymous'}, our AI has spoken! 🤖
+          <div className="w-full max-w-2xl space-y-6">
+            <Card className="bg-slate-800/50 border-red-500/20 backdrop-blur">
+              <CardHeader className="text-center">
+                <div className="text-6xl mb-4">🛸💀🚀</div>
+                <CardTitle className="text-3xl font-bold text-white">
+                  Placemint.AI Galactic Prediction Complete!
+                </CardTitle>
+                <p className="text-purple-300 mt-2">
+                  Transmitted from the cosmic unemployment bureau 🌌
                 </p>
-                <p className="text-sm text-slate-400">
-                  (This is all satirical fun, keep grinding! 💪)
-                </p>
-              </div>
+              </CardHeader>
+              <CardContent className="p-8 text-center space-y-6">
+                <div className="bg-red-900/30 p-6 rounded-lg border border-red-500/30">
+                  <h3 className="text-xl font-bold text-red-300 mb-3">🎭 Final Cosmic Verdict:</h3>
+                  <p className="text-lg text-white">{typingText}</p>
+                </div>
+                
+                <MemeDisplay isVisible={showMeme} />
+                
+                <div className="text-center space-y-4">
+                  <p className="text-purple-300">
+                    Hey {answers.name || 'Anonymous Space Cadet'}, our interstellar AI has spoken from beyond! 🛸
+                  </p>
+                  <p className="text-sm text-slate-400">
+                    (This is 100% satirical entertainment from a parallel universe where humor exists 🌌)
+                  </p>
+                </div>
 
-              <div className="flex gap-4 justify-center">
-                <Button 
-                  onClick={shareResult}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                >
-                  <Share2 className="mr-2 h-4 w-4" />
-                  Share My Roast
-                </Button>
-                <Button 
-                  onClick={resetQuiz}
-                  variant="outline"
-                  className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
-                >
-                  <RotateCcw className="mr-2 h-4 w-4" />
-                  Get Roasted Again
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+                <div className="flex gap-4 justify-center">
+                  <Button 
+                    onClick={shareResult}
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  >
+                    <Share2 className="mr-2 h-4 w-4" />
+                    Share My Galactic Roast
+                  </Button>
+                  <Button 
+                    onClick={resetQuiz}
+                    variant="outline"
+                    className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
+                  >
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Get Roasted Again
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Email Response Component */}
+            <EmailResponse 
+              isVisible={true} 
+              userAnswers={answers} 
+              finalRoast={typingText} 
+            />
+          </div>
         </div>
       </div>
     );
@@ -620,13 +639,13 @@ const Index = () => {
           {/* Header */}
           <div className="text-center mb-8 pt-8">
             <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-              🤖 Placemint.AI
+              🛸 Placemint.AI 🌌
             </h1>
             <p className="text-xl text-purple-300 mb-2">
-              Satirical roasting machine for engineering students
+              Galactic satirical roasting machine for engineering students
             </p>
             <p className="text-sm text-slate-400 mt-2">
-              Prepare to get brutally roasted in Hin-glish! 😈
+              Prepare to get brutally roasted by our cosmic AI in Hin-glish! 🚀😈
             </p>
           </div>
 

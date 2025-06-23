@@ -3,40 +3,86 @@ import React from 'react';
 
 const Background3D = () => {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 animate-pulse" />
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
+      {/* Deep space gradient */}
+      <div className="absolute inset-0 bg-gradient-radial from-purple-900/30 via-black to-black" />
       
-      {/* Floating geometric shapes */}
+      {/* Rotating galaxy */}
+      <div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 animate-spin" style={{ animationDuration: '60s' }}>
+        <div className="w-full h-full rounded-full bg-gradient-conic from-purple-500/20 via-blue-500/20 via-pink-500/20 to-purple-500/20 blur-sm" />
+      </div>
+      
+      {/* Smaller rotating galaxies */}
+      <div className="absolute top-1/4 left-1/4 w-32 h-32 animate-spin opacity-60" style={{ animationDuration: '40s', animationDirection: 'reverse' }}>
+        <div className="w-full h-full rounded-full bg-gradient-conic from-cyan-400/30 to-blue-600/30 blur-sm" />
+      </div>
+      
+      <div className="absolute bottom-1/4 right-1/4 w-24 h-24 animate-spin opacity-40" style={{ animationDuration: '50s' }}>
+        <div className="w-full h-full rounded-full bg-gradient-conic from-pink-400/30 to-purple-600/30 blur-sm" />
+      </div>
+      
+      {/* Orbiting planets */}
+      <div className="absolute top-1/2 left-1/2 w-80 h-80 -translate-x-1/2 -translate-y-1/2 animate-spin" style={{ animationDuration: '45s' }}>
+        <div className="absolute -top-2 left-1/2 w-4 h-4 bg-gradient-to-br from-red-400 to-red-600 rounded-full shadow-lg shadow-red-500/50" />
+        <div className="absolute top-1/2 -right-2 w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full shadow-lg shadow-blue-500/50" />
+        <div className="absolute -bottom-2 left-1/2 w-5 h-5 bg-gradient-to-br from-yellow-400 to-orange-600 rounded-full shadow-lg shadow-yellow-500/50" />
+        <div className="absolute top-1/2 -left-2 w-2 h-2 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg shadow-green-500/50" />
+      </div>
+      
+      {/* Asteroid belt */}
+      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 animate-spin" style={{ animationDuration: '80s' }}>
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-gray-400 rounded-full"
+            style={{
+              top: '50%',
+              left: '50%',
+              transform: `rotate(${i * 18}deg) translateX(250px) translateY(-50%)`,
+              animationDelay: `${i * 0.5}s`
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Floating space debris */}
       <div className="absolute inset-0">
-        {/* Large floating cubes */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-purple-500/20 to-pink-500/20 transform rotate-45 animate-bounce" style={{ animationDelay: '0s', animationDuration: '6s' }} />
-        <div className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 transform rotate-12 animate-bounce" style={{ animationDelay: '2s', animationDuration: '8s' }} />
-        <div className="absolute bottom-32 left-1/4 w-24 h-24 bg-gradient-to-br from-red-500/20 to-orange-500/20 transform -rotate-12 animate-bounce" style={{ animationDelay: '4s', animationDuration: '7s' }} />
-        
-        {/* Medium floating elements */}
-        <div className="absolute top-1/3 right-1/3 w-12 h-12 bg-gradient-to-br from-green-500/30 to-emerald-500/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-14 h-14 bg-gradient-to-br from-yellow-500/30 to-amber-500/30 transform rotate-45 animate-pulse" style={{ animationDelay: '3s' }} />
-        
-        {/* Small floating particles */}
-        <div className="absolute top-1/2 left-1/2 w-8 h-8 bg-gradient-to-br from-purple-400/40 to-pink-400/40 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute top-1/4 left-1/3 w-6 h-6 bg-gradient-to-br from-blue-400/40 to-cyan-400/40 rounded-full animate-ping" style={{ animationDelay: '2.5s' }} />
-        <div className="absolute bottom-1/3 right-1/2 w-10 h-10 bg-gradient-to-br from-red-400/40 to-orange-400/40 rounded-full animate-ping" style={{ animationDelay: '4.5s' }} />
+        <div className="absolute top-20 left-10 w-2 h-2 bg-gray-300 rounded transform rotate-45 animate-bounce opacity-70" style={{ animationDelay: '0s', animationDuration: '4s' }} />
+        <div className="absolute top-40 right-20 w-1 h-1 bg-white rounded animate-pulse opacity-80" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-32 left-1/4 w-3 h-1 bg-gray-400 transform -rotate-12 animate-bounce opacity-60" style={{ animationDelay: '2s', animationDuration: '6s' }} />
+        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-300 rounded animate-ping opacity-50" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute bottom-1/4 right-1/2 w-2 h-1 bg-purple-300 transform rotate-45 animate-pulse opacity-60" style={{ animationDelay: '3s' }} />
       </div>
       
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
+      {/* Nebula clouds */}
+      <div className="absolute top-10 right-10 w-40 h-40 bg-gradient-radial from-purple-500/10 via-pink-500/5 to-transparent rounded-full blur-xl animate-pulse" style={{ animationDuration: '8s' }} />
+      <div className="absolute bottom-20 left-20 w-60 h-32 bg-gradient-radial from-blue-500/10 via-cyan-500/5 to-transparent rounded-full blur-xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+      <div className="absolute top-1/2 right-1/4 w-32 h-48 bg-gradient-radial from-green-500/8 via-emerald-500/4 to-transparent rounded-full blur-xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+      
+      {/* Twinkling stars */}
+      <div className="absolute inset-0">
+        {Array.from({ length: 100 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-px h-px bg-white rounded-full animate-ping"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${2 + Math.random() * 3}s`,
+              animationDelay: `${Math.random() * 5}s`,
+              opacity: 0.3 + Math.random() * 0.7
+            }}
+          />
+        ))}
       </div>
       
-      {/* Animated light beams */}
-      <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse" />
-      <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-blue-500/20 to-transparent animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-0 left-2/3 w-px h-full bg-gradient-to-b from-transparent via-pink-500/20 to-transparent animate-pulse" style={{ animationDelay: '2s' }} />
+      {/* Shooting stars */}
+      <div className="absolute top-10 left-10 w-1 h-1 bg-white rounded-full animate-ping" style={{ animationDuration: '3s' }}>
+        <div className="absolute w-20 h-px bg-gradient-to-r from-white to-transparent -translate-y-1/2" />
+      </div>
+      <div className="absolute bottom-20 right-20 w-1 h-1 bg-blue-300 rounded-full animate-ping" style={{ animationDuration: '4s', animationDelay: '2s' }}>
+        <div className="absolute w-16 h-px bg-gradient-to-r from-blue-300 to-transparent -translate-y-1/2 rotate-45" />
+      </div>
     </div>
   );
 };
