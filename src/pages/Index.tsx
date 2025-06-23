@@ -7,9 +7,11 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { Share2, RotateCcw, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useTheme } from '@/contexts/ThemeContext';
 import Background3D from '@/components/Background3D';
 import MemeDisplay from '@/components/MemeDisplay';
 import EmailResponse from '@/components/EmailResponse';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface Question {
   id: string;
@@ -34,6 +36,7 @@ const Index = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showMeme, setShowMeme] = useState(false);
   const { toast } = useToast();
+  const { theme } = useTheme();
 
   const questions: Question[] = [
     {
@@ -540,20 +543,31 @@ const Index = () => {
     return (
       <div className="min-h-screen relative">
         <Background3D />
+        <ThemeToggle />
         <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-          <Card className="w-full max-w-2xl bg-slate-800/50 border-purple-500/20 backdrop-blur">
-            <CardContent className="p-8 text-center">
-              <div className="animate-spin text-6xl mb-6">🛸</div>
-              <h2 className="text-2xl font-bold text-white mb-4">Placemint.AI Quantum Analysis...</h2>
-              <div className="space-y-3 text-purple-300">
+          <Card className={`w-full max-w-lg sm:max-w-2xl ${
+            theme === 'dark' 
+              ? 'bg-slate-800/50 border-purple-500/20' 
+              : 'bg-white/50 border-purple-300/30'
+          } backdrop-blur`}>
+            <CardContent className="p-6 sm:p-8 text-center">
+              <div className="animate-spin text-4xl sm:text-6xl mb-4 sm:mb-6">🛸</div>
+              <h2 className={`text-xl sm:text-2xl font-bold mb-4 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>Placemint.AI Quantum Analysis...</h2>
+              <div className={`space-y-2 sm:space-y-3 text-sm sm:text-base ${
+                theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+              }`}>
                 <p className="animate-pulse">🌌 Consulting galactic placement database...</p>
                 <p className="animate-pulse">🤖 Training neural networks on cosmic rejection patterns...</p>
                 <p className="animate-pulse">🔥 Calculating maximum roast intensity without causing existential crisis...</p>
                 <p className="animate-pulse">💀 Loading brutal comments from parallel universe...</p>
                 <p className="animate-pulse">🎯 Cross-referencing with unemployment statistics across galaxies...</p>
               </div>
-              <div className="mt-6">
-                <div className="w-full bg-slate-700 rounded-full h-2">
+              <div className="mt-4 sm:mt-6">
+                <div className={`w-full rounded-full h-2 ${
+                  theme === 'dark' ? 'bg-slate-700' : 'bg-gray-200'
+                }`}>
                   <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 h-2 rounded-full animate-pulse w-3/4"></div>
                 </div>
               </div>
@@ -568,39 +582,60 @@ const Index = () => {
     return (
       <div className="min-h-screen relative">
         <Background3D />
+        <ThemeToggle />
         <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-          <div className="w-full max-w-2xl space-y-6">
-            <Card className="bg-slate-800/50 border-red-500/20 backdrop-blur">
-              <CardHeader className="text-center">
-                <div className="text-6xl mb-4">🛸💀🚀</div>
-                <CardTitle className="text-3xl font-bold text-white">
+          <div className="w-full max-w-lg sm:max-w-2xl space-y-4 sm:space-y-6">
+            <Card className={`${
+              theme === 'dark' 
+                ? 'bg-slate-800/50 border-red-500/20' 
+                : 'bg-white/50 border-red-300/30'
+            } backdrop-blur`}>
+              <CardHeader className="text-center p-4 sm:p-6">
+                <div className="text-4xl sm:text-6xl mb-2 sm:mb-4">🛸💀🚀</div>
+                <CardTitle className={`text-2xl sm:text-3xl font-bold ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>
                   Placemint.AI Galactic Prediction Complete!
                 </CardTitle>
-                <p className="text-purple-300 mt-2">
+                <p className={`text-sm sm:text-base mt-2 ${
+                  theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+                }`}>
                   Transmitted from the cosmic unemployment bureau 🌌
                 </p>
               </CardHeader>
-              <CardContent className="p-8 text-center space-y-6">
-                <div className="bg-red-900/30 p-6 rounded-lg border border-red-500/30">
-                  <h3 className="text-xl font-bold text-red-300 mb-3">🎭 Final Cosmic Verdict:</h3>
-                  <p className="text-lg text-white">{typingText}</p>
+              <CardContent className="p-4 sm:p-8 text-center space-y-4 sm:space-y-6">
+                <div className={`${
+                  theme === 'dark' 
+                    ? 'bg-red-900/30 border-red-500/30' 
+                    : 'bg-red-50/80 border-red-300/50'
+                } p-4 sm:p-6 rounded-lg border`}>
+                  <h3 className={`text-lg sm:text-xl font-bold mb-2 sm:mb-3 ${
+                    theme === 'dark' ? 'text-red-300' : 'text-red-700'
+                  }`}>🎭 Final Cosmic Verdict:</h3>
+                  <p className={`text-base sm:text-lg ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>{typingText}</p>
                 </div>
                 
                 <MemeDisplay isVisible={showMeme} />
                 
-                <div className="text-center space-y-4">
-                  <p className="text-purple-300">
+                <div className="text-center space-y-3 sm:space-y-4">
+                  <p className={`text-sm sm:text-base ${
+                    theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+                  }`}>
                     Hey {answers.name || 'Anonymous Space Cadet'}, our interstellar AI has spoken from beyond! 🛸
                   </p>
-                  <p className="text-sm text-slate-400">
+                  <p className={`text-xs sm:text-sm ${
+                    theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+                  }`}>
                     (This is 100% satirical entertainment from a parallel universe where humor exists 🌌)
                   </p>
                 </div>
 
-                <div className="flex gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                   <Button 
                     onClick={shareResult}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-base"
                   >
                     <Share2 className="mr-2 h-4 w-4" />
                     Share My Galactic Roast
@@ -608,7 +643,11 @@ const Index = () => {
                   <Button 
                     onClick={resetQuiz}
                     variant="outline"
-                    className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
+                    className={`text-sm sm:text-base ${
+                      theme === 'dark' 
+                        ? 'border-purple-500/30 text-purple-300 hover:bg-purple-500/10' 
+                        : 'border-purple-300/50 text-purple-700 hover:bg-purple-50'
+                    }`}
                   >
                     <RotateCcw className="mr-2 h-4 w-4" />
                     Get Roasted Again
@@ -617,7 +656,6 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            {/* Email Response Component */}
             <EmailResponse 
               isVisible={true} 
               userAnswers={answers} 
@@ -634,24 +672,31 @@ const Index = () => {
   return (
     <div className="min-h-screen relative">
       <Background3D />
+      <ThemeToggle />
       <div className="relative z-10 min-h-screen p-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8 pt-8">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+          <div className="text-center mb-6 sm:mb-8 pt-6 sm:pt-8">
+            <h1 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-2">
               🛸 Placemint.AI 🌌
             </h1>
-            <p className="text-xl text-purple-300 mb-2">
+            <p className={`text-base sm:text-xl mb-2 ${
+              theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+            }`}>
               Galactic satirical roasting machine for engineering students
             </p>
-            <p className="text-sm text-slate-400 mt-2">
+            <p className={`text-xs sm:text-sm mt-2 ${
+              theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+            }`}>
               Prepare to get brutally roasted by our cosmic AI in Hin-glish! 🚀😈
             </p>
           </div>
 
           {/* Progress Bar */}
-          <div className="mb-8">
-            <div className="flex justify-between text-sm text-purple-300 mb-2">
+          <div className="mb-6 sm:mb-8">
+            <div className={`flex justify-between text-xs sm:text-sm mb-2 ${
+              theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+            }`}>
               <span>Question {currentQuestion + 1} of {questions.length}</span>
               <span>{Math.round(progressPercentage)}%</span>
             </div>
@@ -659,20 +704,28 @@ const Index = () => {
           </div>
 
           {/* Question Card */}
-          <Card className="bg-slate-800/60 border-purple-500/20 backdrop-blur mb-6">
-            <CardHeader>
-              <CardTitle className="text-xl text-white">
+          <Card className={`${
+            theme === 'dark' 
+              ? 'bg-slate-800/60 border-purple-500/20' 
+              : 'bg-white/60 border-purple-300/30'
+          } backdrop-blur mb-4 sm:mb-6`}>
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className={`text-lg sm:text-xl ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
                 {currentQ.question}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-4 sm:p-6">
               {currentQ.type === 'radio' ? (
                 <RadioGroup 
                   onValueChange={handleAnswer}
-                  className="space-y-3"
+                  className="space-y-2 sm:space-y-3"
                 >
                   {currentQ.options?.map((option, index) => (
-                    <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-slate-700/30 transition-colors">
+                    <div key={index} className={`flex items-center space-x-2 p-2 sm:p-3 rounded-lg transition-colors ${
+                      theme === 'dark' ? 'hover:bg-slate-700/30' : 'hover:bg-gray-100/50'
+                    }`}>
                       <RadioGroupItem 
                         value={option} 
                         id={option}
@@ -680,7 +733,9 @@ const Index = () => {
                       />
                       <Label 
                         htmlFor={option} 
-                        className="text-white cursor-pointer flex-1"
+                        className={`cursor-pointer flex-1 text-sm sm:text-base ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}
                       >
                         {option}
                       </Label>
@@ -691,7 +746,11 @@ const Index = () => {
                 <div className="space-y-4">
                   <Input
                     placeholder="Type kar de bhai..."
-                    className="bg-slate-700/50 border-purple-500/30 text-white placeholder:text-slate-400"
+                    className={`${
+                      theme === 'dark' 
+                        ? 'bg-slate-700/50 border-purple-500/30 text-white placeholder:text-slate-400' 
+                        : 'bg-white/50 border-purple-300/50 text-gray-900 placeholder:text-gray-500'
+                    }`}
                     onKeyPress={(e) => {
                       if (e.key === 'Enter') {
                         const value = (e.target as HTMLInputElement).value;
@@ -701,7 +760,9 @@ const Index = () => {
                       }
                     }}
                   />
-                  <p className="text-sm text-slate-400">Press Enter to continue</p>
+                  <p className={`text-xs sm:text-sm ${
+                    theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+                  }`}>Press Enter to continue</p>
                 </div>
               )}
             </CardContent>
@@ -709,13 +770,21 @@ const Index = () => {
 
           {/* Roast Display */}
           {currentRoast && (
-            <Card className="bg-red-900/20 border-red-500/30 backdrop-blur mb-6">
-              <CardContent className="p-6">
+            <Card className={`${
+              theme === 'dark' 
+                ? 'bg-red-900/20 border-red-500/30' 
+                : 'bg-red-50/80 border-red-300/50'
+            } backdrop-blur mb-4 sm:mb-6`}>
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-start space-x-3">
-                  <div className="text-2xl">🔥</div>
+                  <div className="text-xl sm:text-2xl">🔥</div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-red-300 mb-2">Placemint.AI Roast:</h3>
-                    <p className="text-white">
+                    <h3 className={`text-base sm:text-lg font-bold mb-2 ${
+                      theme === 'dark' ? 'text-red-300' : 'text-red-700'
+                    }`}>Placemint.AI Roast:</h3>
+                    <p className={`text-sm sm:text-base ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>
                       {isTyping ? (
                         <>
                           {typingText}
@@ -731,14 +800,17 @@ const Index = () => {
             </Card>
           )}
 
-          {/* Meme Display */}
           <MemeDisplay isVisible={showMeme && currentRoast && !isTyping} />
 
           {/* Footer */}
-          <div className="text-center mt-8 text-slate-400 text-sm">
+          <div className={`text-center mt-6 sm:mt-8 text-xs sm:text-sm ${
+            theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+          }`}>
             <p>⚠️ This is pure satire and entertainment. Don't take it seriously!</p>
             <p className="mt-2">Made with 💀 for engineering students who can take a joke</p>
-            <p className="mt-1 text-purple-400">Powered by Placemint.AI</p>
+            <p className={`mt-1 ${
+              theme === 'dark' ? 'text-purple-400' : 'text-purple-600'
+            }`}>Powered by Placemint.AI</p>
           </div>
         </div>
       </div>

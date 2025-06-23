@@ -1,11 +1,14 @@
 
 import React from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface MemeDisplayProps {
   isVisible: boolean;
 }
 
 const MemeDisplay = ({ isVisible }: MemeDisplayProps) => {
+  const { theme } = useTheme();
+  
   const memes = [
     { text: "When HR asks about your projects", emoji: "🤡", subtitle: "Copy-paste se GitHub green kar diya" },
     { text: "Tier 3 college me placement", emoji: "😭", subtitle: "Excel expert banne ka time aa gaya" },
@@ -39,11 +42,19 @@ const MemeDisplay = ({ isVisible }: MemeDisplayProps) => {
   if (!isVisible) return null;
 
   return (
-    <div className="mt-6 animate-fade-in">
-      <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 text-center shadow-2xl shadow-purple-500/20">
-        <div className="text-6xl mb-3 animate-bounce">{randomMeme.emoji}</div>
-        <h3 className="text-lg font-bold text-purple-300 mb-2">{randomMeme.text}</h3>
-        <p className="text-sm text-slate-400 italic">{randomMeme.subtitle}</p>
+    <div className="mt-4 sm:mt-6 animate-fade-in">
+      <div className={`${
+        theme === 'dark' 
+          ? 'bg-gradient-to-br from-slate-800/80 to-slate-900/80 border-purple-500/30 shadow-purple-500/20' 
+          : 'bg-gradient-to-br from-white/80 to-gray-50/80 border-purple-300/50 shadow-purple-300/20'
+      } backdrop-blur-sm border rounded-xl p-4 sm:p-6 text-center shadow-2xl`}>
+        <div className="text-4xl sm:text-6xl mb-2 sm:mb-3 animate-bounce">{randomMeme.emoji}</div>
+        <h3 className={`text-base sm:text-lg font-bold mb-1 sm:mb-2 ${
+          theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+        }`}>{randomMeme.text}</h3>
+        <p className={`text-xs sm:text-sm italic ${
+          theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+        }`}>{randomMeme.subtitle}</p>
       </div>
     </div>
   );
