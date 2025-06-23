@@ -28,7 +28,7 @@ interface RoastComments {
 
 const Index = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<{[key: string]: string}>({});
+  const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [showResult, setShowResult] = useState(false);
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -41,42 +41,42 @@ const Index = () => {
   const questions: Question[] = [
     {
       id: 'caste',
-      question: 'First things first - Caste batao (for maximum roast potential) 🔥',
+      question: 'First things first - Caste batao ',
       type: 'radio',
       options: ['General', 'OBC', 'SC/ST', "I don't believe in caste", "What's caste?"]
     },
     {
       id: 'name',
-      question: 'Name kya hai bhai? (We need to personalize your roast) 📝',
+      question: 'Chal re chikne naam bata de 😘',
       type: 'text'
     },
     {
       id: 'college',
-      question: 'College tier batao (so we know how hard to roast) 🎓',
+      question: 'Kis college m baap ke paise udhata hai 🎓',
       type: 'radio',
       options: ['Tier 1 (IIT/NIT/BITS)', 'Tier 2 (State Govt)', 'Tier 3 (Private)', 'Diploma/Polytechnic', 'Chhapri University']
     },
     {
       id: 'branch',
-      question: 'Branch kya hai? (Job probability calculator) ⚙️',
+      question: 'Branch kya hai li hai adv topper ? ⚙️',
       type: 'radio',
       options: ['CSE', 'ECE', 'Mech', 'Civil', 'Biotech', 'Other (means jobless)']
     },
     {
       id: 'cgpa',
-      question: 'CGPA kitna hai? (Preparation for reality check) 📊',
+      question: 'Kitni majdoori ki hai re nukar ? (Preparation for reality check) 📊',
       type: 'radio',
       options: ['9+', '8-9', '7-8', '<7', "Don't ask pls"]
     },
     {
       id: 'gender',
-      question: 'Gender? (For diversity quota calculations) 🚹🚺',
+      question: 'Ling hai  🚹🚺',
       type: 'radio',
       options: ['Male', 'Female', 'Other']
     },
     {
       id: 'coding',
-      question: 'Coding aati hai? 💻',
+      question: 'Choding aati hai? 💻',
       type: 'radio',
       options: ['Yes', 'No', 'Copy from GitHub']
     },
@@ -84,17 +84,17 @@ const Index = () => {
       id: 'drink',
       question: 'Peete ho? (Stress management skills) 🍻',
       type: 'radio',
-      options: ['Yes, weekend only', "No, I'm sanskari", 'I live in a bottle']
+      options: ['Yes, weekend only', "No, I'm Gay", 'I live in a bottle']
     },
     {
       id: 'masturbate',
-      question: 'Masturbate karte ho? (Self-employment experience) ✋',
+      question: 'Hilata hai kya re ? (Self-employment experience) ✋',
       type: 'radio',
       options: ['Daily', 'Sometimes', 'Never', 'Prefer not to say']
     },
     {
       id: 'virgin',
-      question: 'Virgin ho? (First-time experience with rejection) 🔒',
+      question: 'Chut chuaa hai re ?(vrigin hai kya)',
       type: 'radio',
       options: ['Yes (sadly)', 'No', 'Emotionally only', "Who's asking?"]
     },
@@ -448,12 +448,12 @@ const Index = () => {
   const getRoastForAnswer = (questionId: string, answer: string) => {
     const questionComments = roastComments[questionId];
     if (!questionComments) return "Interesting choice... anyway moving on.";
-    
+
     const optionComments = questionComments[answer];
     if (!optionComments || optionComments.length === 0) {
       return "Interesting choice... anyway moving on.";
     }
-    
+
     return getRandomFromArray(optionComments);
   };
 
@@ -475,19 +475,19 @@ const Index = () => {
   const handleAnswer = (value: string) => {
     const questionId = questions[currentQuestion].id;
     setAnswers(prev => ({ ...prev, [questionId]: value }));
-    
+
     // Generate roast for current answer using proper mapping
     let personalizedRoast = '';
-    
+
     if (questionId === 'name' && value.trim()) {
-      personalizedRoast = `${value}? Yeh naam toh rejection list mein 3rd baar aaya tha.`;
+      personalizedRoast = `${value}? Yeh naam sunn ke to ladkiya chutt ragad deti hogi 😏`;
     } else {
       personalizedRoast = getRoastForAnswer(questionId, value);
     }
-    
+
     setCurrentRoast(personalizedRoast);
     setShowMeme(true);
-    
+
     typeWriter(personalizedRoast, () => {
       setTimeout(() => {
         setShowMeme(false);
@@ -524,7 +524,7 @@ const Index = () => {
     const shareText = `Just got roasted by Placemint.AI about my placement chances 😭 Check out this brutal ML predictor!`;
     if (navigator.share) {
       navigator.share({
-        title: 'Placemint.AI Roast Results',
+        title: 'Placemint.AI Results',
         text: shareText,
         url: window.location.href
       });
@@ -545,29 +545,25 @@ const Index = () => {
         <Background3D />
         <ThemeToggle />
         <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-          <Card className={`w-full max-w-lg sm:max-w-2xl ${
-            theme === 'dark' 
-              ? 'bg-slate-800/50 border-purple-500/20' 
+          <Card className={`w-full max-w-lg sm:max-w-2xl ${theme === 'dark'
+              ? 'bg-slate-800/50 border-purple-500/20'
               : 'bg-white/50 border-purple-300/30'
-          } backdrop-blur`}>
+            } backdrop-blur`}>
             <CardContent className="p-6 sm:p-8 text-center">
               <div className="animate-spin text-4xl sm:text-6xl mb-4 sm:mb-6">🛸</div>
-              <h2 className={`text-xl sm:text-2xl font-bold mb-4 ${
-                theme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}>Placemint.AI Quantum Analysis...</h2>
-              <div className={`space-y-2 sm:space-y-3 text-sm sm:text-base ${
-                theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
-              }`}>
+              <h2 className={`text-xl sm:text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>Placemint.AI Quantum Analysis...</h2>
+              <div className={`space-y-2 sm:space-y-3 text-sm sm:text-base ${theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+                }`}>
                 <p className="animate-pulse">🌌 Consulting galactic placement database...</p>
-                <p className="animate-pulse">🤖 Training neural networks on cosmic rejection patterns...</p>
-                <p className="animate-pulse">🔥 Calculating maximum roast intensity without causing existential crisis...</p>
-                <p className="animate-pulse">💀 Loading brutal comments from parallel universe...</p>
-                <p className="animate-pulse">🎯 Cross-referencing with unemployment statistics across galaxies...</p>
+                <p className="animate-pulse">🤖 Training neural networks on rejection patterns...</p>
+                <p className="animate-pulse">🔥 Calculating maximum intensity without causing existential crisis...</p>
+                <p className="animate-pulse">💀 Loading comments from parallel ...</p>
+                <p className="animate-pulse">🎯 Cross-referencing with unemployment statistics across ...</p>
               </div>
               <div className="mt-4 sm:mt-6">
-                <div className={`w-full rounded-full h-2 ${
-                  theme === 'dark' ? 'bg-slate-700' : 'bg-gray-200'
-                }`}>
+                <div className={`w-full rounded-full h-2 ${theme === 'dark' ? 'bg-slate-700' : 'bg-gray-200'
+                  }`}>
                   <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 h-2 rounded-full animate-pulse w-3/4"></div>
                 </div>
               </div>
@@ -585,81 +581,72 @@ const Index = () => {
         <ThemeToggle />
         <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
           <div className="w-full max-w-lg sm:max-w-2xl space-y-4 sm:space-y-6">
-            <Card className={`${
-              theme === 'dark' 
-                ? 'bg-slate-800/50 border-red-500/20' 
+            <Card className={`${theme === 'dark'
+                ? 'bg-slate-800/50 border-red-500/20'
                 : 'bg-white/50 border-red-300/30'
-            } backdrop-blur`}>
+              } backdrop-blur`}>
               <CardHeader className="text-center p-4 sm:p-6">
                 <div className="text-4xl sm:text-6xl mb-2 sm:mb-4">🛸💀🚀</div>
-                <CardTitle className={`text-2xl sm:text-3xl font-bold ${
-                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                }`}>
-                  Placemint.AI Galactic Prediction Complete!
+                <CardTitle className={`text-2xl sm:text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>
+                  Placemint.AI Prediction Complete!
                 </CardTitle>
-                <p className={`text-sm sm:text-base mt-2 ${
-                  theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
-                }`}>
-                  Transmitted from the cosmic unemployment bureau 🌌
+                <p className={`text-sm sm:text-base mt-2 ${theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+                  }`}>
+                  Transmitted from the unemployment bureau 🌌
                 </p>
               </CardHeader>
               <CardContent className="p-4 sm:p-8 text-center space-y-4 sm:space-y-6">
-                <div className={`${
-                  theme === 'dark' 
-                    ? 'bg-red-900/30 border-red-500/30' 
+                <div className={`${theme === 'dark'
+                    ? 'bg-red-900/30 border-red-500/30'
                     : 'bg-red-50/80 border-red-300/50'
-                } p-4 sm:p-6 rounded-lg border`}>
-                  <h3 className={`text-lg sm:text-xl font-bold mb-2 sm:mb-3 ${
-                    theme === 'dark' ? 'text-red-300' : 'text-red-700'
-                  }`}>🎭 Final Cosmic Verdict:</h3>
-                  <p className={`text-base sm:text-lg ${
-                    theme === 'dark' ? 'text-white' : 'text-gray-900'
-                  }`}>{typingText}</p>
+                  } p-4 sm:p-6 rounded-lg border`}>
+                  <h3 className={`text-lg sm:text-xl font-bold mb-2 sm:mb-3 ${theme === 'dark' ? 'text-red-300' : 'text-red-700'
+                    }`}>🎭 Final Verdict:</h3>
+                  <p className={`text-base sm:text-lg ${theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>{typingText}</p>
                 </div>
-                
+
                 <MemeDisplay isVisible={showMeme} />
-                
+
                 <div className="text-center space-y-3 sm:space-y-4">
-                  <p className={`text-sm sm:text-base ${
-                    theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
-                  }`}>
-                    Hey {answers.name || 'Anonymous Space Cadet'}, our interstellar AI has spoken from beyond! 🛸
+                  <p className={`text-sm sm:text-base ${theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+                    }`}>
+                    Hey {answers.name || 'Anonymous Space Cadet'}, our AI has spoken from beyond! 🛸
                   </p>
-                  <p className={`text-xs sm:text-sm ${
-                    theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
-                  }`}>
-                    (This is 100% satirical entertainment from a parallel universe where humor exists 🌌)
+                  <p className={`text-xs sm:text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+                    }`}>
+                    (This is 100% satirical trained by AI)
                   </p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                  <Button 
+                  <Button
                     onClick={shareResult}
                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-base"
                   >
                     <Share2 className="mr-2 h-4 w-4" />
-                    Share My Galactic Roast
+                    Share My Results
                   </Button>
-                  <Button 
+                  <Button
                     onClick={resetQuiz}
                     variant="outline"
-                    className={`text-sm sm:text-base ${
-                      theme === 'dark' 
-                        ? 'border-purple-500/30 text-purple-300 hover:bg-purple-500/10' 
+                    className={`text-sm sm:text-base ${theme === 'dark'
+                        ? 'border-purple-500/30 text-purple-300 hover:bg-purple-500/10'
                         : 'border-purple-300/50 text-purple-700 hover:bg-purple-50'
-                    }`}
+                      }`}
                   >
                     <RotateCcw className="mr-2 h-4 w-4" />
-                    Get Roasted Again
+                    Get Results Again
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
-            <EmailResponse 
-              isVisible={true} 
-              userAnswers={answers} 
-              finalRoast={typingText} 
+            <EmailResponse
+              isVisible={true}
+              userAnswers={answers}
+              finalRoast={typingText}
             />
           </div>
         </div>
@@ -678,25 +665,22 @@ const Index = () => {
           {/* Header */}
           <div className="text-center mb-6 sm:mb-8 pt-6 sm:pt-8">
             <h1 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-              🛸 Placemint.AI 🌌
+              Placemint.AI
             </h1>
-            <p className={`text-base sm:text-xl mb-2 ${
-              theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
-            }`}>
-              Galactic satirical roasting machine for engineering students
+            <p className={`text-base sm:text-xl mb-2 ${theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+              }`}>
+              Highly trained AI machine for engineering students
             </p>
-            <p className={`text-xs sm:text-sm mt-2 ${
-              theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
-            }`}>
-              Prepare to get brutally roasted by our cosmic AI in Hin-glish! 🚀😈
+            <p className={`text-xs sm:text-sm mt-2 ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+              }`}>
+              Prepare to get the best placement chances!
             </p>
           </div>
 
           {/* Progress Bar */}
           <div className="mb-6 sm:mb-8">
-            <div className={`flex justify-between text-xs sm:text-sm mb-2 ${
-              theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
-            }`}>
+            <div className={`flex justify-between text-xs sm:text-sm mb-2 ${theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
+              }`}>
               <span>Question {currentQuestion + 1} of {questions.length}</span>
               <span>{Math.round(progressPercentage)}%</span>
             </div>
@@ -704,38 +688,34 @@ const Index = () => {
           </div>
 
           {/* Question Card */}
-          <Card className={`${
-            theme === 'dark' 
-              ? 'bg-slate-800/60 border-purple-500/20' 
+          <Card className={`${theme === 'dark'
+              ? 'bg-slate-800/60 border-purple-500/20'
               : 'bg-white/60 border-purple-300/30'
-          } backdrop-blur mb-4 sm:mb-6`}>
+            } backdrop-blur mb-4 sm:mb-6`}>
             <CardHeader className="p-4 sm:p-6">
-              <CardTitle className={`text-lg sm:text-xl ${
-                theme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}>
+              <CardTitle className={`text-lg sm:text-xl ${theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>
                 {currentQ.question}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 p-4 sm:p-6">
               {currentQ.type === 'radio' ? (
-                <RadioGroup 
+                <RadioGroup
                   onValueChange={handleAnswer}
                   className="space-y-2 sm:space-y-3"
                 >
                   {currentQ.options?.map((option, index) => (
-                    <div key={index} className={`flex items-center space-x-2 p-2 sm:p-3 rounded-lg transition-colors ${
-                      theme === 'dark' ? 'hover:bg-slate-700/30' : 'hover:bg-gray-100/50'
-                    }`}>
-                      <RadioGroupItem 
-                        value={option} 
+                    <div key={index} className={`flex items-center space-x-2 p-2 sm:p-3 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-slate-700/30' : 'hover:bg-gray-100/50'
+                      }`}>
+                      <RadioGroupItem
+                        value={option}
                         id={option}
                         className="border-purple-500 text-purple-500"
                       />
-                      <Label 
-                        htmlFor={option} 
-                        className={`cursor-pointer flex-1 text-sm sm:text-base ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
-                        }`}
+                      <Label
+                        htmlFor={option}
+                        className={`cursor-pointer flex-1 text-sm sm:text-base ${theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}
                       >
                         {option}
                       </Label>
@@ -746,11 +726,10 @@ const Index = () => {
                 <div className="space-y-4">
                   <Input
                     placeholder="Type kar de bhai..."
-                    className={`${
-                      theme === 'dark' 
-                        ? 'bg-slate-700/50 border-purple-500/30 text-white placeholder:text-slate-400' 
+                    className={`${theme === 'dark'
+                        ? 'bg-slate-700/50 border-purple-500/30 text-white placeholder:text-slate-400'
                         : 'bg-white/50 border-purple-300/50 text-gray-900 placeholder:text-gray-500'
-                    }`}
+                      }`}
                     onKeyPress={(e) => {
                       if (e.key === 'Enter') {
                         const value = (e.target as HTMLInputElement).value;
@@ -760,9 +739,8 @@ const Index = () => {
                       }
                     }}
                   />
-                  <p className={`text-xs sm:text-sm ${
-                    theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
-                  }`}>Press Enter to continue</p>
+                  <p className={`text-xs sm:text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+                    }`}>Press Enter to continue</p>
                 </div>
               )}
             </CardContent>
@@ -770,21 +748,18 @@ const Index = () => {
 
           {/* Roast Display */}
           {currentRoast && (
-            <Card className={`${
-              theme === 'dark' 
-                ? 'bg-red-900/20 border-red-500/30' 
+            <Card className={`${theme === 'dark'
+                ? 'bg-red-900/20 border-red-500/30'
                 : 'bg-red-50/80 border-red-300/50'
-            } backdrop-blur mb-4 sm:mb-6`}>
+              } backdrop-blur mb-4 sm:mb-6`}>
               <CardContent className="p-4 sm:p-6">
                 <div className="flex items-start space-x-3">
                   <div className="text-xl sm:text-2xl">🔥</div>
                   <div className="flex-1">
-                    <h3 className={`text-base sm:text-lg font-bold mb-2 ${
-                      theme === 'dark' ? 'text-red-300' : 'text-red-700'
-                    }`}>Placemint.AI Roast:</h3>
-                    <p className={`text-sm sm:text-base ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}>
+                    <h3 className={`text-base sm:text-lg font-bold mb-2 ${theme === 'dark' ? 'text-red-300' : 'text-red-700'
+                      }`}>Placemint.AI :</h3>
+                    <p className={`text-sm sm:text-base ${theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}>
                       {isTyping ? (
                         <>
                           {typingText}
@@ -803,14 +778,17 @@ const Index = () => {
           <MemeDisplay isVisible={showMeme && currentRoast && !isTyping} />
 
           {/* Footer */}
-          <div className={`text-center mt-6 sm:mt-8 text-xs sm:text-sm ${
-            theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
-          }`}>
-            <p>⚠️ This is pure satire and entertainment. Don't take it seriously!</p>
-            <p className="mt-2">Made with 💀 for engineering students who can take a joke</p>
-            <p className={`mt-1 ${
-              theme === 'dark' ? 'text-purple-400' : 'text-purple-600'
-            }`}>Powered by Placemint.AI</p>
+          <div className={`text-center mt-6 sm:mt-8 text-xs sm:text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+            }`}>
+            <p>⚠️ This is pure statical. Do take it seriously!</p>
+            <p className="mt-2">
+              Made with 💀 by <a href="https://github.com/Virajjai" target="_blank" rel="noopener noreferrer" className="font-bold text-pink-500 hover:underline">
+                Sir Viraj Jaiswal Ji
+              </a>
+            </p>
+
+            <p className={`mt-1 ${theme === 'dark' ? 'text-purple-400' : 'text-purple-600'
+              }`}>Powered by Placemint.AI</p>
           </div>
         </div>
       </div>
